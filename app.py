@@ -65,8 +65,6 @@ for part in range(143, 250):
     honbun = honbun.replace("\n", "\r\n")
 
     # ページ数のファイルを作成する
-    try:
-        with open(ncode + "/" + str(part) + ".txt", "w", encoding='shift_jis') as fr:
-            fr.write(honbun)
-    except:
-        pass
+
+    with open(ncode + "/" + str(part) + ".txt", "w", encoding='shift_jis') as fr:
+        fr.write(honbun)
