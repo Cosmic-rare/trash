@@ -5,7 +5,7 @@ import time
 from bs4 import BeautifulSoup
 import os
 import re
-from tqdm import tqdm
+# from tqdm import tqdm
 
 # SSLのおまじない(安全じゃない)
 import ssl
@@ -18,6 +18,8 @@ ncode = "n2267be"
 # ディレクトリーがあるのかを調べる(なければ作る)
 if not os.path.exists(ncode):
     os.makedirs(ncode)
+
+"""
 
 # ページ数を取得
 url = "https://ncode.syosetu.com/novelview/infotop/ncode/{}/".format(ncode)
@@ -36,13 +38,17 @@ print(num_parts)
 num_parts = int(num_parts)
 
 # 進捗の合計値を設定
-bar = tqdm(total = num_parts + 1)
+# bar = tqdm(total = num_parts + 1)
 
+"""
 
 # ページ数の数だけ繰り返す
-for part in range(1, 1+num_parts):
-     
-    bar.update(1)
+# for part in range(1, 1+num_parts):
+
+for part in range(143, 250):
+    
+    # bar.update(1)
+    print(part)
 
     # forで本文のurlを整形
     url = "https://ncode.syosetu.com/{}/{:d}/".format(ncode, part)
@@ -53,8 +59,14 @@ for part in range(1, 1+num_parts):
     honbun = soup.select_one("#novel_honbun").text
 
     # サーバーに負荷がかからないように1秒待つ
-    time.sleep(1)
+    # time.sleep(1)
+
+    # 改行コードを変更する
+    honbun = honbun.replace("\n", "\r\n")
 
     # ページ数のファイルを作成する
-    with open(ncode + "/" + str(part) + ".txt", "w") as fr:
-        fr.write(honbun)
+    try:
+        with open(ncode + "/" + str(part) + ".txt", "w", encoding='shift_jis') as fr:
+            fr.write(honbun)
+    except:
+        pass
