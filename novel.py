@@ -12,14 +12,22 @@ import ssl
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
-# ncodeの取得
-ncode = input('Ncode (If you use default, press Enter)> ')
-if ncode == '':
-    ncode = 'n2267be'
+def check(ncode):
+    # ncodeが有効であるかチェックする
+    url = 'https://ncode.syosetu.com/novelview/infotop/ncode/{}/'.format(ncode)
+    try:
+        request.urlopen(url)
+    except:
+        boo = False
+    else:
+        boo = True
+    # 有効でない場合Falseが帰ってくる
+    return boo
 
-# ディレクトリの作成
-if not os.path.exists(ncode):
-    os.makedirs(ncode)
+def setup(ncode):
+    # ディレクトリの作成
+    if not os.path.exists(ncode):
+        os.makedirs(ncode)
 
 def part(ncode):
     # ページ数を取得する
@@ -67,6 +75,19 @@ def mode_all(ncode):
         # 進捗を更新 => 待つ
         bar.update(1)
         time.sleep(0.75)
+
+
+# ncodeの取得
+while True:
+    ncode = input('Ncode (If you use default, press Enter)> ')
+    if ncode == '':
+        ncode = 'n2267be'
+    
+    # 有効かどうかを調べる
+    if check(ncode):
+        break
+
+setup(ncode)
 
 # Modeの選択
 print('Mode 1:All 2:range 3:OnePage')
