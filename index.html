@@ -1,16 +1,12 @@
 <div id="rink">
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.min.css">
-
   <h1>MarkdownEditor</h1>
   <input id="filename" type="text" placeholder="input file name" >
   <textarea id="editor" name="name" rows="8" cols="40"></textarea>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
   <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
   <script src="js/app.js"></script>
-  
   <a class="button" id="download" href="#" download="text.md" onclick="handleDownload()">ダウンロード</a>
-  
 </div>
 
 <div id="file_up">
@@ -18,57 +14,7 @@
     <input type='file' multiple='multiple' name='imgs[]'>
     <button type='submit'>送信</button>
   </form>
-
   <script src='https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js'></script>
   <script src='https://www.gstatic.com/firebasejs/7.5.0/firebase-storage.js'></script>
   <script src="js/file.js"></script>
 </div>
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
-<div id="app">
-  <input v-model="num">
-  <div v-if="num == 0">
-    <p>0件です</p>
-  </div>
-  <div v-else-if="num == 1">
-    <p>あと1件です</p>
-  </div>
-  <div v-else>
-    <p>{{ num }}件もあります！</p>
-  </div>
-  
-    
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Creator</th>
-          <th>Github Stars</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="framework in frameworks">
-          <td>{{ framework.name }}</td>
-          <td>{{ framework.creator }}</td>
-          <td>{{ framework.stars }}</td>
-        </tr>
-      </tbody>
-    </table>
-    
-  <p>{{ frame }}</p>
-    <select v-model="frame" class="form-control">
-      <option value="vue">Vue.js</option>
-      <option value="react">React</option>
-      <option value="angular">Angular</option>
-    </select>
-  
-    <p>Message is: {{ count }}</p>
-    <button v-on:click="countup">カウント！</button>
-    <button v-on:click="crear">リセット！</button><br>
-
-    {{msg}}<br>
-    <input type="text" v-model="msg">  
-
-<script src="js/script.js"></script>
